@@ -16,4 +16,5 @@ func TestServerisHealthy(t *testing.T) {
 	newServer.Handler.ServeHTTP(resp, req)
 
 	assert.Equal(t, resp.Code, http.StatusOK)
+	assert.Equal(t, resp.Body.String(), "Server is Healthy, the temperature seems perfect!")
 }

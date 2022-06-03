@@ -10,7 +10,7 @@ type Server struct {
 }
 
 func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "")
+	fmt.Fprint(w, "Server is Healthy, the temperature seems perfect!")
 }
 
 func NewServer() *http.Server {
