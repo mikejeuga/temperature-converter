@@ -7,16 +7,19 @@ import (
 )
 
 type TemperatureConverter interface {
-	ConvertCtoF(temp models.Celsius) models.Fahrenheit
+	ConvertCtoF(temp models.Celsius) (models.Fahrenheit, error)
 }
 
-func ConvertCtoF(t *testing.T, converter TemperatureConverter) {
-	t.Run("Given a converter receives the temoerature in Celsius:", func(t *testing.T) {
+func ConvertCtoFCriteria(t *testing.T, converter TemperatureConverter) {
+	t.Run("Given a converter receives the temperature in Celsius:", func(t *testing.T) {
 		t.Run("It gives back the temperature in Fahrenheit.", func(t *testing.T) {
 			celsius := models.Celsius(5)
 			expectedFahrenheit := models.Fahrenheit(41)
 
-			assert.Equal(t, converter.ConvertCtoF(celsius), expectedFahrenheit)
+			fahrenheit, err := converter.ConvertCtoF(celsius)
+			assert.NoError(t, err)
+
+			assert.Equal(t, fahrenheit, expectedFahrenheit)
 		})
 	})
 }
