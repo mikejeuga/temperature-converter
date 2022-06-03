@@ -27,5 +27,6 @@ func TestConvertCtoF(t *testing.T) {
 	newServer.Handler.ServeHTTP(resp, req)
 
 	assert.Equal(t, resp.Code, http.StatusOK)
+	assert.Equal(t, resp.Body.String(), "41")
 
 }
