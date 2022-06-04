@@ -10,28 +10,29 @@ import (
 )
 
 type Server struct {
-}
-
-type ConversionHandler struct {
-	degreeConverter domain.Converter
+	temperatureHandler ConversionHandler
 }
 
 func NewServer() *http.Server {
-	s := &Server{}
 
 	converter := domain.NewConverter(domain.ConvertCtoF, domain.ConvertFtoC)
 	conversionHandler := NewConversionHandler(converter)
+	s := &Server{temperatureHandler: *conversionHandler}
 
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", s.Home)
-	router.HandleFunc("/to-fahrenheit/{temp}", conversionHandler.ConvertCtoF)
-	router.HandleFunc("/to-celsius/{temp}", conversionHandler.ConvertFtoC)
+	router.HandleFunc("/to-fahrenheit/{temp}", s.temperatureHandler.ConvertCtoF)
+	router.HandleFunc("/to-celsius/{temp}", s.temperatureHandler.ConvertFtoC)
 
 	return &http.Server{
 		Addr:    ":8069",
 		Handler: router,
 	}
+}
+
+type ConversionHandler struct {
+	degreeConverter domain.Converter
 }
 
 func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
