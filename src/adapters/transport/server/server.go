@@ -21,6 +21,7 @@ func NewServer() *http.Server {
 
 	router.HandleFunc("/", s.Home)
 	router.HandleFunc("/tofahrenheit/{temp}", conversionHandler.ConvertCtoF)
+
 	return &http.Server{
 		Addr:    ":8069",
 		Handler: router,

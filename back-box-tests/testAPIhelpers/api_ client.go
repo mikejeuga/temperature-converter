@@ -41,7 +41,7 @@ func (c *APIClient) ConvertCtoF(temp models.Celsius) (models.Fahrenheit, error) 
 }
 
 func NewAPIClient() *APIClient {
-	baseURL := "https://localhost:8069"
+	baseURL := "http://localhost:8069"
 	client := &http.Client{
 		Transport: http.DefaultTransport,
 		Timeout:   5 * time.Second,
