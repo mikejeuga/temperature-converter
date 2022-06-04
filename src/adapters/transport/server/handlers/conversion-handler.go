@@ -13,10 +13,6 @@ type ConversionHandler struct {
 	degreeConverter domain.Converter
 }
 
-func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Server is Healthy, the temperature seems perfect!")
-}
-
 func (h ConversionHandler) ConvertCtoF(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	temp, err := strconv.ParseFloat(vars["temp"], 64)
