@@ -12,6 +12,7 @@ type TemperatureConverter interface {
 }
 
 func ConvertCtoFCriteria(t *testing.T, converter TemperatureConverter) {
+	t.Helper()
 	t.Run("Given a converter receives the temperature in Celsius:", func(t *testing.T) {
 		t.Run("It gives back the temperature in Fahrenheit.", func(t *testing.T) {
 			celsius := models.Celsius(5)
@@ -26,6 +27,7 @@ func ConvertCtoFCriteria(t *testing.T, converter TemperatureConverter) {
 }
 
 func ConvertFtoCCriteria(t *testing.T, converter TemperatureConverter) {
+	t.Helper()
 	t.Run("Given a converter receives the temperature in Fahrenheit:", func(t *testing.T) {
 		t.Run("It gives back the temperature in Celsius.", func(t *testing.T) {
 			fahrenheit := models.Fahrenheit(41)
