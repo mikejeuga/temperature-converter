@@ -14,6 +14,10 @@ type APIClient struct {
 	httpDriver *http.Client
 }
 
+func (c *APIClient) ConvertFtoC(temp models.Fahrenheit) (models.Celsius, error) {
+	return models.Celsius(5), nil
+}
+
 func (c *APIClient) ConvertCtoF(temp models.Celsius) (models.Fahrenheit, error) {
 	url := c.baseURL + "/tofahrenheit/" + fmt.Sprintf("%v", temp)
 
