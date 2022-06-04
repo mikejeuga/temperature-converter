@@ -26,8 +26,8 @@ func ConvertCtoFCriteria(t *testing.T, converter TemperatureConverter) {
 }
 
 func ConvertFtoCCriteria(t *testing.T, converter TemperatureConverter) {
-	t.Run("Given a converter receives the temperature in Celsius:", func(t *testing.T) {
-		t.Run("It gives back the temperature in Fahrenheit.", func(t *testing.T) {
+	t.Run("Given a converter receives the temperature in Fahrenheit:", func(t *testing.T) {
+		t.Run("It gives back the temperature in Celsius.", func(t *testing.T) {
 			fahrenheit := models.Fahrenheit(41)
 			expectedCelsius := models.Celsius(5)
 

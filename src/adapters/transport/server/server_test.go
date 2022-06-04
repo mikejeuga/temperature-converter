@@ -21,12 +21,24 @@ func TestServerisHealthy(t *testing.T) {
 
 func TestConvertCtoF(t *testing.T) {
 	newServer := server.NewServer()
-	req := httptest.NewRequest(http.MethodGet, "/tofahrenheit/5", nil)
+	req := httptest.NewRequest(http.MethodGet, "/to-fahrenheit/5", nil)
 	resp := httptest.NewRecorder()
 
 	newServer.Handler.ServeHTTP(resp, req)
 
 	assert.Equal(t, resp.Code, http.StatusOK)
 	assert.Equal(t, resp.Body.String(), "41")
+
+}
+
+func TestConvertFtoC(t *testing.T) {
+	newServer := server.NewServer()
+	req := httptest.NewRequest(http.MethodGet, "/to-celsius/41", nil)
+	resp := httptest.NewRecorder()
+
+	newServer.Handler.ServeHTTP(resp, req)
+
+	assert.Equal(t, resp.Code, http.StatusOK)
+	assert.Equal(t, resp.Body.String(), "5")
 
 }

@@ -12,15 +12,21 @@ import (
 type Server struct {
 }
 
+type ConversionHandler struct {
+	degreeConverter domain.Converter
+}
+
 func NewServer() *http.Server {
 	s := &Server{}
 
-	conversionHandler := NewConversionHandler(domain.Converter(domain.ConvertCtoF))
+	converter := domain.NewConverter(domain.ConvertCtoF, domain.ConvertFtoC)
+	conversionHandler := NewConversionHandler(converter)
 
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", s.Home)
-	router.HandleFunc("/tofahrenheit/{temp}", conversionHandler.ConvertCtoF)
+	router.HandleFunc("/to-fahrenheit/{temp}", conversionHandler.ConvertCtoF)
+	router.HandleFunc("/to-celsius/{temp}", conversionHandler.ConvertFtoC)
 
 	return &http.Server{
 		Addr:    ":8069",
@@ -30,10 +36,6 @@ func NewServer() *http.Server {
 
 func (s *Server) Home(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Server is Healthy, the temperature seems perfect!")
-}
-
-type ConversionHandler struct {
-	degreeConverter domain.Converter
 }
 
 func (h ConversionHandler) ConvertCtoF(w http.ResponseWriter, r *http.Request) {
@@ -50,6 +52,21 @@ func (h ConversionHandler) ConvertCtoF(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Fprint(w, f)
 
+}
+
+func (h ConversionHandler) ConvertFtoC(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	temp, err := strconv.ParseFloat(vars["temp"], 64)
+	if err != nil {
+		http.Error(w, "Error converting temperature", http.StatusInternalServerError)
+	}
+
+	f, err := h.degreeConverter.ConvertFtoC(models.Fahrenheit(temp))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	fmt.Fprint(w, f)
 }
 
 func NewConversionHandler(degreeConverter domain.Converter) *ConversionHandler {

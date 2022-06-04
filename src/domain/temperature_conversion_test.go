@@ -7,7 +7,7 @@ import (
 )
 
 func TestConvertCtoF(t *testing.T) {
-	converter := domain.Converter(domain.ConvertCtoF)
-
+	converter := domain.NewConverter(domain.ConvertCtoF, domain.ConvertFtoC)
 	specifications.ConvertCtoFCriteria(t, converter)
+	specifications.ConvertFtoCCriteria(t, converter)
 }
