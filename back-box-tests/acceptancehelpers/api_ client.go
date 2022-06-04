@@ -1,4 +1,4 @@
-package testAPIhelpers
+package acceptancehelpers
 
 import (
 	"fmt"
