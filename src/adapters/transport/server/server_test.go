@@ -8,18 +8,7 @@ import (
 	"testing"
 )
 
-func TestServerisHealthy(t *testing.T) {
-	newServer := server.NewServer()
-	req := httptest.NewRequest(http.MethodGet, "/", nil)
-	resp := httptest.NewRecorder()
-
-	newServer.Handler.ServeHTTP(resp, req)
-
-	assert.Equal(t, resp.Code, http.StatusOK)
-	assert.Equal(t, resp.Body.String(), "Server is Healthy, the temperature seems perfect!")
-}
-
-func Test(t *testing.T) {
+func TestSever(t *testing.T) {
 	t.Parallel()
 	newServer := server.NewServer()
 	for _, tc := range []struct {
@@ -28,6 +17,12 @@ func Test(t *testing.T) {
 		response            *httptest.ResponseRecorder
 		expectedTemperature string
 	}{
+		{
+			description:         "Server is healthy",
+			request:             httptest.NewRequest(http.MethodGet, "/", nil),
+			response:            httptest.NewRecorder(),
+			expectedTemperature: "Server is Healthy, the temperature seems perfect!",
+		},
 		{
 			description:         "Convert Celsius to Fahrenheit",
 			request:             httptest.NewRequest(http.MethodGet, "/to-fahrenheit/5", nil),
