@@ -3,7 +3,7 @@
 package server_test
 
 import (
-	"github.com/alecthomas/assert/v2"
+	"github.com/matryer/is"
 	"github.com/mikejeuga/temperature-converter/src/adapters/transport/server"
 	"net/http"
 	"net/http/httptest"
@@ -39,9 +39,10 @@ func TestServer(t *testing.T) {
 		},
 	} {
 		t.Run(tc.description, func(t *testing.T) {
+			is := is.New(t)
 			newServer.Handler.ServeHTTP(tc.response, tc.request)
-			assert.Equal(t, tc.response.Code, http.StatusOK)
-			assert.Equal(t, tc.response.Body.String(), tc.expectedTemperature)
+			is.Equal(tc.response.Code, http.StatusOK)
+			is.Equal(tc.response.Body.String(), tc.expectedTemperature)
 		})
 	}
 }

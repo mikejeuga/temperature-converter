@@ -17,8 +17,5 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag temperature-converter:$(date +%s)
 
-    - name: Create Container
-      run: docker-compose -f docker-compose.yml up --build -d
-
     - name: Run functional tests
       run: make at ut

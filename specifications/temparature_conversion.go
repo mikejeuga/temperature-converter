@@ -1,7 +1,7 @@
 package specifications
 
 import (
-	"github.com/alecthomas/assert/v2"
+	"github.com/matryer/is"
 	"github.com/mikejeuga/temperature-converter/models"
 	"testing"
 )
@@ -13,30 +13,32 @@ type TemperatureConverter interface {
 
 func ConvertCtoFCriteria(t *testing.T, converter TemperatureConverter) {
 	t.Helper()
+	is := is.New(t)
 	t.Run("Given a converter receives the temperature in Celsius:", func(t *testing.T) {
 		t.Run("It gives back the temperature in Fahrenheit.", func(t *testing.T) {
 			celsius := models.Celsius(5)
 			expectedFahrenheit := models.Fahrenheit(41)
 
 			fahrenheit, err := converter.ConvertCtoF(celsius)
-			assert.NoError(t, err)
+			is.NoErr(err)
 
-			assert.Equal(t, fahrenheit, expectedFahrenheit)
+			is.Equal(fahrenheit, expectedFahrenheit)
 		})
 	})
 }
 
 func ConvertFtoCCriteria(t *testing.T, converter TemperatureConverter) {
 	t.Helper()
+	is := is.New(t)
 	t.Run("Given a converter receives the temperature in Fahrenheit:", func(t *testing.T) {
 		t.Run("It gives back the temperature in Celsius.", func(t *testing.T) {
 			fahrenheit := models.Fahrenheit(41)
 			expectedCelsius := models.Celsius(5)
 
 			celsius, err := converter.ConvertFtoC(fahrenheit)
-			assert.NoError(t, err)
+			is.NoErr(err)
 
-			assert.Equal(t, celsius, expectedCelsius)
+			is.Equal(celsius, expectedCelsius)
 		})
 	})
 }
