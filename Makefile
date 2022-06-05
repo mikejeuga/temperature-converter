@@ -14,7 +14,9 @@ gopher:
 
 t: test
 test:
+	@docker-compose -f docker-compose.yml up -d
 	@go test -v ./...
+	@docker-compose down
 
 
 ut: unit-test

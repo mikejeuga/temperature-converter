@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/mikejeuga/temperature-converter/models"
-	"github.com/mikejeuga/temperature-converter/src/domain"
+	"github.com/mikejeuga/temperature-converter/src/internal/domain"
 	"net/http"
 	"strconv"
 )

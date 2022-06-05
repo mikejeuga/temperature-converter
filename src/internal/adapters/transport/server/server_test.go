@@ -4,7 +4,7 @@ package server_test
 
 import (
 	"github.com/matryer/is"
-	"github.com/mikejeuga/temperature-converter/src/adapters/transport/server"
+	"github.com/mikejeuga/temperature-converter/src/internal/adapters/transport/server"
 	"net/http"
 	"net/http/httptest"
 	"testing"

@@ -2,16 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/mikejeuga/temperature-converter/src/adapters/transport/server"
+	"github.com/mikejeuga/temperature-converter/src/app"
 	"log"
 )
 
 func main() {
 	fmt.Println("Check the temperature!")
 
-	newServer := server.NewServer()
+	App := app.NewApp()
 
-	err := newServer.ListenAndServe()
+	err := App.Server.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
 	}

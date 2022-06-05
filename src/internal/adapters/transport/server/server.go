@@ -3,8 +3,8 @@ package server
 import (
 	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/mikejeuga/temperature-converter/src/adapters/transport/server/handlers"
-	"github.com/mikejeuga/temperature-converter/src/domain"
+	"github.com/mikejeuga/temperature-converter/src/internal/adapters/transport/server/handlers"
+	"github.com/mikejeuga/temperature-converter/src/internal/domain"
 	"net/http"
 )
 

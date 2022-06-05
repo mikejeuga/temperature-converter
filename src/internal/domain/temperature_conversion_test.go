@@ -4,7 +4,7 @@ package domain_test
 
 import (
 	"github.com/mikejeuga/temperature-converter/specifications"
-	"github.com/mikejeuga/temperature-converter/src/domain"
+	"github.com/mikejeuga/temperature-converter/src/internal/domain"
 	"testing"
 )
 
