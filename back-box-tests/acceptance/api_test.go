@@ -1,3 +1,5 @@
+//+go:build acceptance
+
 package acceptance
 
 import (
@@ -7,6 +9,7 @@ import (
 )
 
 func TestTemperatureConversionAPI(t *testing.T) {
+
 	apiClient := acceptancehelpers.NewAPIClient()
 
 	t.Run("Convert Celsius to Fahrenheit", func(t *testing.T) {

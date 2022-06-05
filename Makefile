@@ -16,9 +16,16 @@ t: test
 test:
 	@go test -v ./...
 
+
 ut: unit-test
 unit-test:
 	@go test -v --tags=unit ./...
+
+at: acceptance-test
+acceptance-test:
+	@docker-compose -f docker-compose.yml up -d
+	@go test -v --tags=acceptance ./...
+	@docker-compose down
 
 c: commit
 commit:
