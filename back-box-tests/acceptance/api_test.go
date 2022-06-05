@@ -7,7 +7,6 @@ import (
 )
 
 func TestTemperatureConversionAPI(t *testing.T) {
-	t.Skip("trying the actions")
 	apiClient := acceptancehelpers.NewAPIClient()
 
 	t.Run("Convert Celsius to Fahrenheit", func(t *testing.T) {
