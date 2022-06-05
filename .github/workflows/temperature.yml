@@ -23,4 +23,6 @@ jobs:
 
     steps:
     - name: Run functional tests
+      run: docker run -d -p 8069:8069 temperature-converter
       run: go test -v ./...
+      run: docker stop temperature-converter
