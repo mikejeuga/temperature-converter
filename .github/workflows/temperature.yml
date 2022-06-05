@@ -19,6 +19,8 @@ jobs:
 
   tests:
 
+    runs-on: runs-on: ubuntu-latest
+
     steps:
     - name: Run functional tests
       run: go test -v ./...
