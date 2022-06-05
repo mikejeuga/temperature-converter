@@ -17,8 +17,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag temperature-converter:$(date +%s)
 
-   - name: Up the container
-     run: docker run -p 8069:8069 temperature-converter:latest
+  tests:
 
     - name: Run functional tests
       run: go test -v ./...
