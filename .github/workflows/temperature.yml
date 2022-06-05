@@ -18,4 +18,4 @@ jobs:
       run: docker build . --file Dockerfile --tag temperature-converter:$(date +%s)
 
     - name: Run functional tests
-      run: make at
+      run: make t
