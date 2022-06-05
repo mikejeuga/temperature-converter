@@ -6,7 +6,7 @@ gopher:
 	@touch .gitignore
 	@go get -u github.com/gorilla/mux
 	@go install github.com/matryer/moq@latest
-	@go get github.com/alecthomas/assert/v2
+	@go install github.com/alecthomas/assert/v2
 	@go get github.com/jackc/pgx
 	@go get golang-migrate/migrate
 	@go get github.com/spf13/viper
