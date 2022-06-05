@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func TestSever(t *testing.T) {
+func TestServer(t *testing.T) {
 	t.Parallel()
 	newServer := server.NewServer()
 	for _, tc := range []struct {

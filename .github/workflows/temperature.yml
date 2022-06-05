@@ -21,4 +21,4 @@ jobs:
       run: docker-compose -f docker-compose.yml up --build -d
 
     - name: Run functional tests
-      run: make at
+      run: make at ut
