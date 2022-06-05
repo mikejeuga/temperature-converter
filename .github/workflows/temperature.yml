@@ -22,7 +22,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run functional tests
+    - name: Create Container
       run: docker run -d -p 8069:8069 temperature-converter
+
+    - name: Run functional tests
       run: go test -v ./...
+
+    - name: Teardown container
       run: docker stop temperature-converter
