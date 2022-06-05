@@ -9,7 +9,6 @@ WORKDIR /app
 COPY go.mod go.sum ./
 copy ./ ./
 
-RUN go test -v --tags=unit ./...
 RUN go build -o main ./cmd/main.go
 
 EXPOSE 8069
