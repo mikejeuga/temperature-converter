@@ -19,5 +19,6 @@ jobs:
 
   tests:
 
+    steps:
     - name: Run functional tests
       run: go test -v ./...
