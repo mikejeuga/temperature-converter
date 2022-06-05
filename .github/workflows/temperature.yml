@@ -20,6 +20,8 @@ jobs:
     - name: Create Container
       run: docker-compose -f docker-compose.yml up -d
 
-    - name: Run functional tests
+    - name: Tidy
       run: go mod tidy
+
+    - name: Run functional tests
       run: go test -v ./...
