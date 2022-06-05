@@ -18,4 +18,6 @@ jobs:
       run: docker build . --file Dockerfile --tag temperature-converter:$(date +%s)
 
     - name: Run functional tests
+      run: docker run -p 8069:8069 temperature-converter:$(date +%s)
       run:  go test -v ./...
+      run: docker stop temperature-converter:$(date +%s)
