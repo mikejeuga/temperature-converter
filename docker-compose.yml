@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  app:
+    ports:
+      - '8069:8069'
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile

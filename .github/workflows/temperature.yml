@@ -18,10 +18,7 @@ jobs:
       run: docker build . --file Dockerfile --tag temperature-converter:$(date +%s)
 
     - name: Create Container
-      run: docker run -d -p 8069:8069 temperature-converter:$(date +%s)
+      run: docker-compose -f docker-compose.yml up -d
 
     - name: Run functional tests
       run: go test -v ./...
-
-    - name: Teardown container
-      run: docker stop temperature-converter
