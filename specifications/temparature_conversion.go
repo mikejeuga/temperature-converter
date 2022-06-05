@@ -11,7 +11,7 @@ type TemperatureConverter interface {
 	ConvertFtoC(temp models.Fahrenheit) (models.Celsius, error)
 }
 
-func ConvertCtoFCriteria(t *testing.T, converter TemperatureConverter) {
+func ConvertCelsiusToFahrenheit(t *testing.T, converter TemperatureConverter) {
 	t.Helper()
 	is := is.New(t)
 	t.Run("Given a converter receives the temperature in Celsius:", func(t *testing.T) {
@@ -27,7 +27,7 @@ func ConvertCtoFCriteria(t *testing.T, converter TemperatureConverter) {
 	})
 }
 
-func ConvertFtoCCriteria(t *testing.T, converter TemperatureConverter) {
+func ConvertFahrenheitToCelsius(t *testing.T, converter TemperatureConverter) {
 	t.Helper()
 	is := is.New(t)
 	t.Run("Given a converter receives the temperature in Fahrenheit:", func(t *testing.T) {

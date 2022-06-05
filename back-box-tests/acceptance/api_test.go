@@ -13,11 +13,11 @@ func TestTemperatureConversionAPI(t *testing.T) {
 	apiClient := acceptancehelpers.NewAPIClient()
 
 	t.Run("Convert Celsius to Fahrenheit", func(t *testing.T) {
-		specifications.ConvertCtoFCriteria(t, apiClient)
+		specifications.ConvertCelsiusToFahrenheit(t, apiClient)
 	})
 
 	t.Run("Convert Fahrenheit to Celsius", func(t *testing.T) {
-		specifications.ConvertFtoCCriteria(t, apiClient)
+		specifications.ConvertFahrenheitToCelsius(t, apiClient)
 	})
 
 }
