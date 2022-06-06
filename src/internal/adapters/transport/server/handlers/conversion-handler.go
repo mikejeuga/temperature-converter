@@ -17,7 +17,7 @@ func (h ConversionHandler) ConvertCtoF(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	temp, err := strconv.ParseFloat(vars["temp"], 64)
 	if err != nil {
-		http.Error(w, "Error converting temperature", http.StatusInternalServerError)
+		http.Error(w, "Error parsing temperature", http.StatusInternalServerError)
 	}
 
 	f, err := h.degreeConverter.ConvertCtoF(models.Celsius(temp))
@@ -33,7 +33,7 @@ func (h ConversionHandler) ConvertFtoC(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	temp, err := strconv.ParseFloat(vars["temp"], 64)
 	if err != nil {
-		http.Error(w, "Error converting temperature", http.StatusInternalServerError)
+		http.Error(w, "Error parsing temperature", http.StatusInternalServerError)
 	}
 
 	f, err := h.degreeConverter.ConvertFtoC(models.Fahrenheit(temp))
