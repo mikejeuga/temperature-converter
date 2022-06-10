@@ -11,7 +11,15 @@ type TemperatureConverter interface {
 	ConvertFtoC(temp models.Fahrenheit) (models.Celsius, error)
 }
 
-func ConvertCelsiusToFahrenheit(t *testing.T, converter TemperatureConverter) {
+type TemperatureConverterSpec struct {
+	converter TemperatureConverter
+}
+
+func NewTemperatureConverterSpec(converter TemperatureConverter) *TemperatureConverterSpec {
+	return &TemperatureConverterSpec{converter: converter}
+}
+
+func (th *TemperatureConverterSpec) ConvertCelsiusToFahrenheit(t *testing.T) {
 	t.Helper()
 	is := is.New(t)
 	t.Run("Given a converter receives the temperature in Celsius:", func(t *testing.T) {
@@ -19,7 +27,7 @@ func ConvertCelsiusToFahrenheit(t *testing.T, converter TemperatureConverter) {
 			celsius := models.Celsius(5)
 			expectedFahrenheit := models.Fahrenheit(41)
 
-			fahrenheit, err := converter.ConvertCtoF(celsius)
+			fahrenheit, err := th.converter.ConvertCtoF(celsius)
 			is.NoErr(err)
 
 			is.Equal(fahrenheit, expectedFahrenheit)
@@ -27,7 +35,7 @@ func ConvertCelsiusToFahrenheit(t *testing.T, converter TemperatureConverter) {
 	})
 }
 
-func ConvertFahrenheitToCelsius(t *testing.T, converter TemperatureConverter) {
+func (th *TemperatureConverterSpec) ConvertFahrenheitToCelsius(t *testing.T) {
 	t.Helper()
 	is := is.New(t)
 	t.Run("Given a converter receives the temperature in Fahrenheit:", func(t *testing.T) {
@@ -35,7 +43,7 @@ func ConvertFahrenheitToCelsius(t *testing.T, converter TemperatureConverter) {
 			fahrenheit := models.Fahrenheit(41)
 			expectedCelsius := models.Celsius(5)
 
-			celsius, err := converter.ConvertFtoC(fahrenheit)
+			celsius, err := th.converter.ConvertFtoC(fahrenheit)
 			is.NoErr(err)
 
 			is.Equal(celsius, expectedCelsius)

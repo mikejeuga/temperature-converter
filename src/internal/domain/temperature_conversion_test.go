@@ -10,6 +10,8 @@ import (
 
 func TestConvertCtoF(t *testing.T) {
 	converter := domain.NewConverter(domain.ConvertCtoF, domain.ConvertFtoC)
-	specifications.ConvertCelsiusToFahrenheit(t, converter)
-	specifications.ConvertFahrenheitToCelsius(t, converter)
+	spec := specifications.NewTemperatureConverterSpec(converter)
+
+	spec.ConvertCelsiusToFahrenheit(t)
+	spec.ConvertFahrenheitToCelsius(t)
 }
