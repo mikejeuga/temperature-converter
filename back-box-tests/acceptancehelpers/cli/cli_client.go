@@ -7,30 +7,41 @@ import (
 	"strconv"
 )
 
-type APIClient struct {
-	Cmd *exec.Cmd
+type TestCliCLient struct {
+	fileName string
 }
 
-func NewClient() *APIClient {
-	return &APIClient{}
+func NewTestCliCLient(fileName string) *TestCliCLient {
+	return &TestCliCLient{
+		fileName: fileName,
+	}
 }
 
-func (A *APIClient) ConvertCtoF(temp models.Celsius) (models.Fahrenheit, error) {
-	A.Cmd = exec.Command("toF", fmt.Sprintf("%f", temp))
-	output, err := A.Cmd.Output()
+func (c TestCliCLient) ConvertCtoF(temp models.Celsius) (models.Fahrenheit, error) {
+	output, err := c.goRun()
 	if err != nil {
-		return 0, fmt.Errorf("error, you did not receive a correct output, %v", err)
+		return 0, err
 	}
 
-	tempFloat, coversionErr := strconv.ParseFloat(string(output), 64)
-	if coversionErr != nil {
-		return 0, fmt.Errorf("error converting to float, %v", coversionErr)
+	f := string(output)
+	floatFahrenheit, err := strconv.ParseFloat(f, 64)
+	if err != nil {
+		return 0, fmt.Errorf("error converting string to float, %v", err)
 	}
 
-	return models.Fahrenheit(tempFloat), nil
+	return models.Fahrenheit(floatFahrenheit), nil
 }
 
-func (A *APIClient) ConvertFtoC(temp models.Fahrenheit) (models.Celsius, error) {
+func (c TestCliCLient) ConvertFtoC(temp models.Fahrenheit) (models.Celsius, error) {
 	//TODO implement me
 	panic("implement me")
+}
+
+func (c TestCliCLient) goRun() ([]byte, error) {
+	cmd := exec.Command("go", "run", c.fileName)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return nil, fmt.Errorf("error running the fileName built: %v", err)
+	}
+	return output, nil
 }
