@@ -12,7 +12,7 @@ type CLI struct {
 	tempConverter domain.Converter
 }
 
-func (c CLI) ConvertCtoF(w io.Writer, r io.Reader) (models.Fahrenheit, error) {
+func (c CLI) ConvertCtoF(w io.Writer, r io.Reader) {
 	readAll, err := io.ReadAll(r)
 	if err != nil {
 		fmt.Errorf("error reading data from r, %v", err)
@@ -31,14 +31,32 @@ func (c CLI) ConvertCtoF(w io.Writer, r io.Reader) (models.Fahrenheit, error) {
 		fmt.Errorf("error converting Celsius to Fahrenheit, %v", err)
 	}
 
-	return fahrenheit, nil
+	fmt.Fprintf(w, "%v", fahrenheit)
 }
 
-func (c CLI) ConvertFtoC(temp models.Fahrenheit) (models.Celsius, error) {
-	//TODO implement me
-	panic("implement me")
+func (c CLI) ConvertFtoC(w io.Writer, r io.Reader) {
+	readAll, err := io.ReadAll(r)
+	if err != nil {
+		fmt.Errorf("error reading data from r, %v", err)
+	}
+
+	input := string(readAll)
+
+	float, err := strconv.ParseFloat(input, 64)
+	if err != nil {
+		fmt.Errorf("converting string to float, %v", err)
+	}
+
+	m := models.Fahrenheit(float)
+	fahrenheit, err := c.tempConverter.ConvertFtoC(m)
+	if err != nil {
+		fmt.Errorf("error converting Celsius to Fahrenheit, %v", err)
+	}
+
+	fmt.Fprintf(w, "%v", fahrenheit)
 }
 
-func NewCLI(tempConverter domain.Converter) *CLI {
-	return &CLI{tempConverter: tempConverter}
+func NewCLI() *CLI {
+	converter := domain.NewConverter(domain.ConvertCtoF, domain.ConvertFtoC)
+	return &CLI{tempConverter: converter}
 }

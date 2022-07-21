@@ -4,11 +4,6 @@ import (
 	"github.com/mikejeuga/temperature-converter/models"
 )
 
-var (
-	DefaultC2F = ConverterCtoF(ConvertCtoF)
-	DefaultF2C = ConverterFtoC(ConvertFtoC)
-)
-
 type ConverterCtoF func(temp models.Celsius) (models.Fahrenheit, error)
 type ConverterFtoC func(temp models.Fahrenheit) (models.Celsius, error)
 
