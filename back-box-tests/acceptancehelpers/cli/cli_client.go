@@ -18,7 +18,8 @@ func NewTestCliCLient(fileName string) *TestCliCLient {
 }
 
 func (c TestCliCLient) ConvertCtoF(temp models.Celsius) (models.Fahrenheit, error) {
-	output, err := c.goRun()
+	sprintf := fmt.Sprintf("%v", temp)
+	output, err := c.goRun(sprintf)
 	if err != nil {
 		return 0, err
 	}
@@ -37,8 +38,8 @@ func (c TestCliCLient) ConvertFtoC(temp models.Fahrenheit) (models.Celsius, erro
 	panic("implement me")
 }
 
-func (c TestCliCLient) goRun() ([]byte, error) {
-	cmd := exec.Command("go", "run", c.fileName)
+func (c TestCliCLient) goRun(value string) ([]byte, error) {
+	cmd := exec.Command("go", "run", c.fileName, value)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return nil, fmt.Errorf("error running the fileName built: %v", err)

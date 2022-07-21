@@ -9,7 +9,7 @@ WORKDIR /app
 COPY go.mod go.sum ./
 copy ./ ./
 
-RUN go build -o main ./cmd/main.go
+RUN go build -o main ./cmd/web/main.go
 
 EXPOSE 8069
 

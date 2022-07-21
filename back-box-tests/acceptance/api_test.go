@@ -18,19 +18,11 @@ func TestTemperatureConversionAPI(t *testing.T) {
 		apiClient := web.NewAPIClient()
 		spec := specifications.NewTemperatureConverterSpec(apiClient)
 
-	spec.ConvertCelsiusToFahrenheit(t)
-	spec.ConvertFahrenheitToCelsius(t)
+		spec.ConvertCelsiusToFahrenheit(t)
+		spec.ConvertFahrenheitToCelsius(t)
 		spec.ConvertCelsiusToFahrenheit(t)
 
 		spec.ConvertFahrenheitToCelsius(t)
-	})
-
-	t.Run("Acceptance test with the CLI driver", func(t *testing.T) {
-		cliClient := cli.NewClient()
-
-		spec := specifications.NewTemperatureConverterSpec(cliClient)
-		spec.ConvertCelsiusToFahrenheit(t)
-
 	})
 
 }
@@ -49,7 +41,7 @@ func TestMain(m *testing.M) {
 func TestCLITemperatureConverterAPI(t *testing.T) {
 
 	fileName := "main.go"
-	testClientCLI := acceptancehelpers.NewTestCliCLient(fileName)
+	testClientCLI := cli.NewTestCliCLient(fileName)
 
 	spec := specifications.NewTemperatureConverterSpec(testClientCLI)
 
