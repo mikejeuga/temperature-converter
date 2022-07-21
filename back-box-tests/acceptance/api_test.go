@@ -3,18 +3,30 @@
 package acceptance
 
 import (
-	"github.com/mikejeuga/temperature-converter/back-box-tests/acceptancehelpers"
+	"github.com/mikejeuga/temperature-converter/back-box-tests/acceptancehelpers/cli"
+	"github.com/mikejeuga/temperature-converter/back-box-tests/acceptancehelpers/web"
 	"github.com/mikejeuga/temperature-converter/specifications"
 	"testing"
 )
 
 func TestTemperatureConversionAPI(t *testing.T) {
 
-	apiClient := acceptancehelpers.NewAPIClient()
-	spec := specifications.NewTemperatureConverterSpec(apiClient)
+	t.Run("Acceptance test with the HTTP driver", func(t *testing.T) {
 
-	spec.ConvertCelsiusToFahrenheit(t)
+		apiClient := web.NewAPIClient()
+		spec := specifications.NewTemperatureConverterSpec(apiClient)
 
-	spec.ConvertFahrenheitToCelsius(t)
+		spec.ConvertCelsiusToFahrenheit(t)
+
+		spec.ConvertFahrenheitToCelsius(t)
+	})
+
+	t.Run("Acceptance test with the CLI driver", func(t *testing.T) {
+		cliClient := cli.NewClient()
+
+		spec := specifications.NewTemperatureConverterSpec(cliClient)
+		spec.ConvertCelsiusToFahrenheit(t)
+
+	})
 
 }
