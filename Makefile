@@ -1,4 +1,5 @@
 repo=$(shell basename "`pwd`")
+TEST_DIR=$(realpath ./cmd/cli)
 gopher:
 	@git init
 	@go mod init github.com/mikejeuga/$(repo)
